@@ -25,27 +25,38 @@ export default function AddBlog() {
   };
 
   return (
-    <div className="p-10">
-      <h1 className="text-2xl mb-4">Add Blog</h1>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="w-full max-w-2xl bg-gray-800/60 backdrop-blur-md p-8 rounded-xl shadow-xl border border-gray-700">
+        <h1 className="text-3xl font-bold text-white mb-6 text-center">
+           Add New Blog
+        </h1>
 
-      <input
-        className="border p-2 block mb-2"
-        placeholder="Title"
-        onChange={e => setTitle(e.target.value)}
-      />
+        <input
+          className="w-full mb-4 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+          placeholder="Blog Title"
+          onChange={e => setTitle(e.target.value)}
+        />
 
-      <textarea
-        className="border p-2 block mb-2"
-        placeholder="Content"
-        onChange={e => setContent(e.target.value)}
-      />
+        <textarea
+          className="w-full mb-6 px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none h-48"
+          placeholder="Write your blog content here..."
+          onChange={e => setContent(e.target.value)}
+        />
 
-      <button
-        className="bg-purple-500 text-white px-4 py-2"
-        onClick={addBlog}
-      >
-        Add
-      </button>
+        <button
+          className="w-full bg-purple-600 hover:bg-purple-700 transition text-white py-2 rounded-lg font-semibold"
+          onClick={addBlog}
+        >
+          Publish Blog
+        </button>
+
+        <button
+          className="w-full mt-3 text-gray-400 hover:text-white transition text-sm"
+          onClick={() => navigate("/")}
+        >
+          ← Back to Blogs
+        </button>
+      </div>
     </div>
   );
 }

@@ -29,24 +29,28 @@ export default function Blogs() {
   };
 
   return (
-    <div className="p-10">
-      
-      {/*NAV bar if token exists else not exists*/}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Blog App</h1>
-
+    <div className="min-h-screen">
+      {/* Header */}
+      <div className="mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
+          <h1 className="text-4xl font-bold text-white">Blog IT</h1>
+          <p className="text-gray-400 mt-1">
+            Read and share thoughts with the blog community
+          </p>
+        </div>
+
+        <div className="flex gap-2">
           {!token ? (
             <>
               <button
-                className="bg-blue-500 text-white px-3 py-1 mr-2"
+                className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition text-white"
                 onClick={() => navigate("/login")}
               >
                 Login
               </button>
 
               <button
-                className="bg-green-500 text-white px-3 py-1"
+                className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 transition text-white"
                 onClick={() => navigate("/register")}
               >
                 Register
@@ -55,14 +59,14 @@ export default function Blogs() {
           ) : (
             <>
               <button
-                className="bg-purple-500 text-white px-3 py-1 mr-2"
+                className="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 transition text-white"
                 onClick={() => navigate("/add")}
               >
-                Add Blog
+               Add Blog
               </button>
 
               <button
-                className="bg-red-500 text-white px-3 py-1"
+                className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition text-white"
                 onClick={logout}
               >
                 Logout
@@ -72,32 +76,54 @@ export default function Blogs() {
         </div>
       </div>
 
-      {/*BLOG LIST */}
-      {blogs.map(b => (
-        <div key={b._id} className="border p-3 mb-3">
-          <h2 className="font-bold">{b.title}</h2>
-          <p>{b.content}</p>
-          <small>By {b.user.username}</small>
+      {/* blogs displaying */}
+      <div className="max-w-3xl mx-auto space-y-6">
+        {blogs.map(b => (
+          <article
+            key={b._id}
+            className="bg-gray-800/60 backdrop-blur-md border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition"
+          >
+            <h2 className="text-2xl font-semibold text-white mb-2">
+              {b.title}
+            </h2>
 
-          {token && (
-            <div className="mt-2">
-              <button
-                className="bg-yellow-400 px-2 py-1 mr-2"
-                onClick={() => navigate(`/edit/${b._id}`)}
-              >
-                Edit
-              </button>
+            <p className="text-gray-300 leading-relaxed mb-4">
+              {b.content}
+            </p>
 
-              <button
-                className="bg-red-500 text-white px-2 py-1"
-                onClick={() => deleteBlog(b._id)}
-              >
-                Delete
-              </button>
+            <div className="flex items-center justify-between text-sm text-gray-400">
+              <span>
+                By <span className="font-medium">{b.user.username}</span>
+              </span>
+
+              {token && (
+                <div className="flex gap-2">
+                  <button
+                    className="px-3 py-1 rounded-md bg-yellow-500 hover:bg-yellow-600 transition text-black"
+                    onClick={() => navigate(`/edit/${b._id}`)}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    className="px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 transition text-white"
+                    onClick={() => deleteBlog(b._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      ))}
+          </article>
+        ))}
+      </div>
+
+      {/* no blogs */}
+      {blogs.length === 0 && (
+        <p className="text-center text-gray-400 mt-20">
+          No blogs available yet.
+        </p>
+      )}
     </div>
   );
 }

@@ -8,29 +8,37 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Blogs />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
 
-      <Route
-        path="/add"
-        element={
-          <ProtectedRoute>
-            <AddBlog />
-          </ProtectedRoute>
-        }
-      />
+      {/*entire page */}
+      <main className="max-w-6xl mx-auto px-4 py-6">
+        <div className="animate-fadeIn">
+          <Routes>
+            <Route path="/" element={<Blogs />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-      <Route
-        path="/edit/:id"
-        element={
-          <ProtectedRoute>
-            <EditBlog />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+            <Route
+              path="/add"
+              element={
+                <ProtectedRoute>
+                  <AddBlog />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <EditBlog />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </div>
+      </main>
+    </div>
   );
 }
 
